@@ -14,6 +14,7 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequestMapping("/users")
 public class UserController {
+    //   http://localhost:8080/swagger-ui/index.html
 
     private final UserService userService;
 
