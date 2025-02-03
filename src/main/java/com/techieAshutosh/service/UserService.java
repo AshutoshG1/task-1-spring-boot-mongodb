@@ -1,5 +1,6 @@
 package com.techieAshutosh.service;
 
+import com.techieAshutosh.exception.RecordNotFoundException;
 import com.techieAshutosh.model.User;
 import com.techieAshutosh.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +37,7 @@ public class UserService {
 
     public Mono<User> updateUser(String id, User user) {
         return userRepository.findById(id)
-                .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found with id: " + id)))
+                .switchIfEmpty(Mono.error(new RecordNotFoundException(HttpStatus.NOT_FOUND, "User not found with id: " + id)))
                 .flatMap(existingUser -> {
                     existingUser.setUserName(user.getUserName());
                     existingUser.setUserEmail(user.getUserEmail());
